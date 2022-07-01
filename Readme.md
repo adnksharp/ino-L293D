@@ -7,7 +7,7 @@ Para controlar la dirección de un motor, es necesario poner una salida de cada 
 
 Para esto, primero se ponen en 0 las salidas de cada motor y luego se ponen en 1 las salidas de los motores que se quieren invertir usando como referencia una variable de tipo bool que cambia cada 5.1s.
 
-```arduino
+```c++
 digitalWrite(motor1_dir1, HIGH); 
     digitalWrite(motor1_dir2, LOW);
 digitalWrite(motor2_dir1, HIGH); 
