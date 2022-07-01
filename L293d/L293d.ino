@@ -1,6 +1,6 @@
 byte motor[2][3] = {
     {9, 8, 7},
-    {3, 4, 5}};
+    {5, 3, 4}};
 byte c, i, g, f;
 bool right = true;
 
