@@ -1,33 +1,31 @@
 # L293D
 [![l293d-bb.png](https://i.postimg.cc/FFMgbrkY/l293d-bb.png)](https://postimg.cc/z3kg81jN)
-Uso de un L293D para controlar la dirección y velocidad de dos motores.
 
-# Dirección
-Para controlar la dirección de un motor, es necesario poner una salida de cada motor en 1 y en 0 la otra salida. Mientras que para invertir la dirección de un motor, es necesario invertir las salidas de cada motor.
 
-Para esto, primero se ponen en 0 las salidas de cada motor y luego se ponen en 1 las salidas de los motores que se quieren invertir usando como referencia una variable de tipo bool que cambia cada 5.1s.
+Uso del modulo L293D para controlar la dirección y velocidad de dos motores.
 
-```c++
-digitalWrite(motor1_dir1, HIGH); 
-    digitalWrite(motor1_dir2, LOW);
-digitalWrite(motor2_dir1, HIGH); 
-    digitalWrite(motor2_dir2, LOW);
-delay(5100);
+## Hardware y software necesarios
+- Placa de desarrollo Arduino.
+- 2 motores 12V.
+- 1 Fuente de alimentación de 12V.
+- Modulo L293D.
+- [Arduino IDE](https://www.arduino.cc/en/software) o [Arduino CLI](https://arduino.github.io/arduino-cli/0.23/installation/).
 
-digitalWrite(motor1_dir1, LOW); 
-    digitalWrite(motor1_dir2, HIGH);
-digitalWrite(motor2_dir1, LOW); 
-    digitalWrite(motor2_dir2, HIGH);
-delay(5100);
-```
+## Funcionamiento
+### Variables
+- ```motor```: Matriz que contiene los pines de las entradas del modulo L293D.
+- ```c``` e ```i```: Variables para funcionamiento de bucles.
+- ```f``` y ```g```: Variables para controlar la velocidad de los motores.
+- ```right```: Variable para controlar la dirección de los motores.
 
-# Velocidad
-Para controlar la velocidad de un motor, se necesita una salida de tipo PWM que se puede controlar con una variable de tipo byte que cambia cada 20ms de 0 a 255 y de 255 a 0.
-
+### Funcionamiento
+#### Speed
+Usando la función **analogWrite** y la variable ```g``` se controla la velocidad de los motores. Para esto la variable ```g``` varia de 0 a 255 y de 255 a 0 usando la variable ```f``` que cambia entre -1 y 1.
 ```arduino
-g++ || g--;
-analogWrite(motor, g);
+for (c = 0; c < 2; c++)
+        analogWrite(motor[c][0], g);
 ```
-
+#### Direction
+Para controlar la dirección de los motores se usa la variable ```right``` que cambia entre 0 y 1. Si ```right``` es 1 los pines motor[0][1] y motor[1][1] se ponen a 1 y los pines motor[0][2] y motor[1][2] se ponen a 0. Si ```right``` es 0 los pines motor[0][2] y motor[1][2] se ponen a 1 y los pines motor[0][1] y motor[1][1] se ponen a 0.
 
 [![l293d-esquem-tico.png](https://i.postimg.cc/CMBsfB5y/l293d-esquem-tico.png)](https://postimg.cc/V5wCxNX4)
